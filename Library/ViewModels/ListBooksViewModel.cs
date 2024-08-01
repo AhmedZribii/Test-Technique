@@ -52,7 +52,7 @@ namespace Library.ViewModels
             LoadBooks();
             DeleteBookCommand = new RelayCommand(DeleteBook, CanUpdateOrDelete);
             UpdateBookCommand = new RelayCommand(UpdateBook, CanUpdateOrDelete);
-            AddBookCommand = new NavigateCommand(_navigationStore ,createViewModel);
+            AddBookCommand = new NavigateCommand(navigationStore ,createViewModel);
         }
 
        
