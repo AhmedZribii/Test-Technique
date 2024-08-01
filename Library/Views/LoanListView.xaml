@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Library.Views.LoanListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Library.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="List of loans" FontSize="24"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            
+            <TextBox Width="200" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"  Margin="10"/>
+            <CheckBox Content="By Borrower" IsChecked="{Binding SearchByBorrower}" Margin="10"/>
+            <CheckBox Content="By Book" IsChecked="{Binding SearchByBook}" Margin="10"/>
+            <Button Content="Search" Command="{Binding SearchLoanCommand}" Margin="10"/>
+        </StackPanel>
+
+        <ListView ItemsSource="{Binding Loans}" SelectedItem="{Binding SelectedLoan}" Grid.Row="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding LoanId}" />
+                    <GridViewColumn Header="Loan Date" DisplayMemberBinding="{Binding LoanDate}" />
+                    <GridViewColumn Header="Expected Return Date" DisplayMemberBinding="{Binding ExpectedReturnDate}" />
+                    <GridViewColumn Header="Borrower" DisplayMemberBinding="{Binding Borrower}" />
+                    <GridViewColumn Header="Book Title" DisplayMemberBinding="{Binding BorrowedBook.Title}" />
+                    <GridViewColumn Header="Is Returned" DisplayMemberBinding="{Binding IsReturned}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Update" Command="{Binding UpdateLoanCommand}" IsEnabled="{Binding Path=SelectedLoan, Converter={StaticResource NullToBoolConverter}}" Margin="10"/>
+            <Button Content="Mark as Returned" Command="{Binding MarkAsReturnedCommand}" IsEnabled="{Binding Path=SelectedLoan, Converter={StaticResource NullToBoolConverter}}" Margin="10"/>
+            <Button Content="Delete" Command="{Binding DeleteLoanCommand}" IsEnabled="{Binding Path=SelectedLoan, Converter={StaticResource NullToBoolConverter}}" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
