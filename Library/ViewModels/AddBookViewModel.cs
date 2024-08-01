@@ -36,7 +36,7 @@ namespace Library.ViewModels
         {
             NewBook = new Books();
             AddBookCommand = new RelayCommand(AddBook);
-            BookList = new NavigateCommand(navigationStore,createListBooksViewModel);
+            BookList = new NavigateCommand(navigationStore,createViewModel);
 
         }
 
